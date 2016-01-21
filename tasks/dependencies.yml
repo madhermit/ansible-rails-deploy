@@ -19,5 +19,6 @@
     name: "{{ item }}"
     user_install: no
   with_items: required_gems
+  executable: "/usr/local/rbenv/shims/gem"
   when: required_gems is defined and
         required_gems != []
