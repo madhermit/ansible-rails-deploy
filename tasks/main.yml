@@ -1,7 +1,5 @@
 ---
 # tasks file for helabs.rails-deploy
-- include: ../vars/secrets.yml
-
 - include: dependencies.yml
   become: yes
 
