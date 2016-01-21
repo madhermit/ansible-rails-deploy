@@ -1,0 +1,23 @@
+---
+- name: dependencies.yml - installing packages
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: installed
+  with_items: required_packages
+  when: required_packages is defined and
+        required_packages != []
+
+- name: dependencies.yml - installing bundler
+  gem:
+    name: bundler
+    user_install: no
+
+- name: dependencies.yml - installing gems
+  gem:
+    name: "{{ item }}"
+    user_install: no
+  with_items: required_gems
+  when: required_gems is defined and
+        required_gems != []

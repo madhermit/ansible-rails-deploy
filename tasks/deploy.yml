@@ -1,0 +1,107 @@
+---
+- name: deploy.yml - get release date
+  set_fact:
+    rails_release: "{{ ansible_date_time.date | replace('-', '') }}{{ ansible_date_time.time | replace(':', '') }}"
+    rails_path_app: "{{ rails_path }}/{{ rails_app_name }}"
+
+- name: deploy.yml - get release path
+  set_fact:
+    rails_release_path: "{{ rails_path_app }}/releases/{{ rails_release }}"
+
+- name: deploy.yml - create app dirs
+  file:
+    dest: "{{ item }}"
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    mode: 0755
+    recurse: yes
+    state: directory
+  with_items:
+    - "{{ rails_path_app }}/releases"
+    - "{{ rails_path_app }}/shared/log"
+    - "{{ rails_path_app }}/shared/pids"
+    - "{{ rails_path_app }}/shared/tmp"
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - clone repository
+  git:
+    repo: "{{ rails_repo }}"
+    dest: "{{ rails_release_path }}"
+    depth: 1
+    force: yes
+    clone: yes
+    recursive: yes
+    version: "{{ rails_repo_version }}"
+    accept_hostkey: yes
+  notify: restart app
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - create public directory
+  file:
+    dest: "{{ rails_release_path }}/public"
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    mode: 0755
+    state: directory
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - remove destinations for links
+  file:
+    dest: "{{ rails_release_path }}/{{ item }}"
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    state: absent
+  with_items:
+    - log
+    - pids
+    - tmp
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - create symlinks in release
+  file:
+    src: "{{ rails_path_app }}/shared/{{ item }}"
+    dest: "{{ rails_release_path }}/{{ item }}"
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    state: link
+  with_items:
+    - log
+    - pids
+    - tmp
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - run bundle install
+  command: bundle install --deployment --without {{ rails_bundle_without }}
+  args:
+    chdir: "{{ rails_release_path }}"
+  notify: restart app
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - activate the new release
+  file:
+    src: "{{ rails_release_path }}"
+    dest: "{{ rails_path_app }}/current"
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    state: link
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - get releases
+  shell: ls -1t {{ rails_path_app }}/releases/ | tail -n +{{ rails_keep_releases + 1 }}
+  register: rails_releases_dirs
+
+- name: deploy.yml - remove old releases
+  file:
+    dest: "{{ rails_path_app }}/releases/{{ item }}"
+    state: absent
+  with_items: "{{ rails_releases_dirs.stdout_lines }}"
+  when: "{{ item | match('\\d{14}') }}"
+  become_user: "{{ rails_user }}"
+  become: yes

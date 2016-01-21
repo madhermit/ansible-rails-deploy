@@ -1,0 +1,10 @@
+{
+    "{{ rails_app_name }}": {
+        "repository": "{{ rails_repo }}",
+        "version": "{{ rails_repo_version }}",
+        "path": "{{ rails_path_app }}",
+        "user": "{{ rails_user }}",
+        "environment": {{ rails_environment | to_nice_json }},
+        "latest_release": "{{ rails_release }}"
+    }
+}

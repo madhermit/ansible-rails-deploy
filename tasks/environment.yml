@@ -1,0 +1,10 @@
+---
+- name: environment.yml - add env vars
+  template:
+    src: env.j2
+    dest: "/etc/profile.d/{{ rails_app_name }}.sh"
+    mode: 0755
+    owner: root
+    group: root
+  when: rails_environment is defined and
+        rails_environment != {}

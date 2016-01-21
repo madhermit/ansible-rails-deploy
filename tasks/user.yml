@@ -1,0 +1,38 @@
+---
+- name: user.yml - add group for app user
+  group:
+    name: "{{ rails_user }}"
+    system: yes
+
+- name: user.yml - add app user
+  user:
+    name: "{{ rails_user }}"
+    createhome: yes
+    home: "{{ rails_path }}"
+    group: "{{ rails_user }}"
+    system: yes
+    state: present
+
+- name: user.yml - create .ssh dir
+  file:
+    dest: "{{ rails_path }}/.ssh"
+    mode: 0700
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    state: directory
+
+- name: user.yml - add ssh public key
+  copy:
+    content: "{{ rails_user_ssh_pub }}"
+    dest: "{{ rails_path }}/.ssh/id_rsa.pub"
+    mode: 0400
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+
+- name: user.yml - add ssh private key
+  copy:
+    content: "{{ rails_user_ssh_priv }}"
+    dest: "{{ rails_path }}/.ssh/id_rsa"
+    mode: 0400
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"

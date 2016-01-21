@@ -1,0 +1,11 @@
+---
+# handlers file for helabs.rails-deploy
+- name: restart app
+  file:
+    dest: "{{ rails_path }}/{{ rails_app_name }}/shared/tmp/restart.txt"
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    mode: 0644
+    state: touch
+  become: yes
+  become_user: "{{ rails_user }}"

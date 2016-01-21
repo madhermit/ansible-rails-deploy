@@ -1,0 +1,12 @@
+---
+# defaults file for helabs.rails-deploy
+required_packages:
+  - git
+  - build-essential
+rails_bundle_without: #This is a list
+required_gems:
+  - rails
+rails_user: demo_app
+rails_path: "/opt/{{ rails_user }}"
+rails_app_name: "{{ rails_user }}"
+rails_repo: "git@github.com:lucazz/demo_app.git"
