@@ -7,7 +7,7 @@ rails_bundle_without: #This is a list
 required_gems:
   - rails
 rails_user: demo_app
-rails_path: "/opt/{{ rails_user }}"
+rails_path: "/opt"
 rails_app_name: "{{ rails_user }}"
 rails_repo: "git@github.com:lucazz/demo_app.git"
 rails_repo_version: "latest"
