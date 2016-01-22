@@ -74,13 +74,23 @@
   become_user: "{{ rails_user }}"
   become: yes
 
-- name: deploy.yml - run bundle install
-  command: bundle install --deployment --without {{ rails_bundle_without }}
-  args:
-    chdir: "{{ rails_release_path }}"
-  notify: restart app
-  become_user: "{{ rails_user }}"
+#- name: deploy.yml - run bundle install
+#  command: bundle install --deployment --without {{ rails_bundle_without }}
+#  args:
+#    chdir: "{{ rails_release_path }}"
+#  notify: restart app
+#  become_user: "{{ rails_user }}"
+#  become: yes
+
+- name: deploy.yml - Running bundler
+  bundler:
+    state: present
+    exclude_groups: "{{ rails_bundle_without }}"
+    gem_path: "/usr/local/rbenv/shims/gem"
+  chdir: "{{ rails_release_path }}"
   become: yes
+  become_user: "{{ rails_user }}"
+
 
 - name: deploy.yml - activate the new release
   file:
