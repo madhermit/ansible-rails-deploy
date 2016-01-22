@@ -87,7 +87,7 @@
     state: present
     exclude_groups: "{{ rails_bundle_without }}"
     gem_path: "/usr/local/rbenv/shims/gem"
-  chdir: "{{ rails_release_path }}"
+    chdir: "{{ rails_release_path }}"
   become: yes
   become_user: "{{ rails_user }}"
 
