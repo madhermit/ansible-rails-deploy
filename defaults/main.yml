@@ -15,5 +15,5 @@ rails_app_name: demo_app
 rails_environment:
   RACK_ENV: production
 rails_keep_releases: 2
-rails_repo: "ssh://git@github.com:lucazz/demo_app.git"
+rails_repo: "git@github.com:lucazz/demo_app.git"
 rails_repo_version: "release-0.1"
