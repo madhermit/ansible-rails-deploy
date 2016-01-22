@@ -16,4 +16,4 @@ rails_environment:
   RACK_ENV: production
 rails_keep_releases: 2
 rails_repo: "git@github.com:lucazz/demo_app.git"
-rails_repo_version: "v0.1"
+rails_repo_version: "0.1"
