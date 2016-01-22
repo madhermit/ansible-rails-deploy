@@ -42,6 +42,8 @@
   git:
     repo: "{{ rails_repo }}"
     dest: "{{ rails_release_path }}"
+    version: "{{ rails_repo_version }}"
+    depth: 1
   notify: restart app
   become: yes
   become_user: "{{ rails_user }}"

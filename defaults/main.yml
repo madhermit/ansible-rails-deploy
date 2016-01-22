@@ -4,10 +4,16 @@ required_packages:
   - git
   - build-essential
 rails_bundle_without: #This is a list
+  - test
 required_gems:
-  - rails
-rails_user: demo_app
-rails_path: "/opt"
-rails_app_name: "{{ rails_user }}"
+  - bundler
+rails_user: rails
+rails_user: "rails"
+rails_home: "/var/www"
+rails_path: "/var/www"
+rails_app_name: demo_app
+rails_environment:
+  RACK_ENV: production
+rails_keep_releases: 2
 rails_repo: "git@github.com:lucazz/demo_app.git"
 rails_repo_version: "release-0.1"
