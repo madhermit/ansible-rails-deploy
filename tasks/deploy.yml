@@ -24,25 +24,14 @@
   become_user: "{{ rails_user }}"
   become: yes
 
-#- name: deploy.yml - clone repository
-#  git:
-#    repo: "{{ rails_repo }}"
-#    dest: "{{ rails_release_path }}"
-#    depth: 1
-#    force: yes
-#    clone: yes
-#    recursive: yes
-#    version: "{{ rails_repo_version }}"
-#    accept_hostkey: yes
-#  notify: restart app
-#  become_user: "{{ rails_user }}"
-#  become: yes
-
 - name: deploy.yml - fethcing application sources
   git:
     repo: "{{ rails_repo }}"
     dest: "{{ rails_release_path }}"
     version: "{{ rails_repo_version }}"
+    clone: yes
+    depth: 1
+    recursive: yes
     accept_hostkey: True
   notify: restart app
   become: yes
