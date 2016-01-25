@@ -24,7 +24,7 @@
   become_user: "{{ rails_user }}"
   become: yes
 
-- name: deploy.yml - fethcing application sources
+- name: deploy.yml - Fetching application sources
   git:
     repo: "{{ rails_repo }}"
     dest: "{{ rails_release_path }}"
