@@ -82,13 +82,19 @@
 #  become_user: "{{ rails_user }}"
 #  become: yes
 
+- name: deploy.yml - Creating bundle folder at vendors
+  file:
+    path: "{{ rails_release_path }}/vendors/bundle"
+    state: directory
+  register: rails_bundle_path
+
 - name: deploy.yml - Running bundler
   bundler:
     state: latest
     exclude_groups: "{{ rails_bundle_without }}"
     gem_path: "/usr/local/rbenv/shims/gem"
     executable: "/usr/local/rbenv/shims/bundle"
-    chdir: "{{ rails_release_path }}"
+    chdir: "{{ rails_bundle_path }}"
   become: yes
   become_user: "{{ rails_user }}"
 
