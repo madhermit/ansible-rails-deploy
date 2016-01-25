@@ -91,19 +91,6 @@
   become_user: "{{ rails_user }}"
   become: yes
 
-#- name: deploy.yml - Running bundler
-#  bundler:
-#    state: present
-#    exclude_groups: "{{ rails_bundle_without }}"
-#    gem_path: "/usr/local/rbenv/shims/gem"
-#    executable: "/usr/local/rbenv/shims/bundle"
-#    chdir: "{{ rails_release_path }}"
-#    user_install: True
-#    extra_args: "--path vendor/bundle"
-#  become: yes
-#  become_user: "{{ rails_user }}"
-
-
 - name: deploy.yml - activate the new release
   file:
     src: "{{ rails_release_path }}"
@@ -125,4 +112,8 @@
   with_items: "{{ rails_releases_dirs.stdout_lines }}"
   when: "{{ item | match('\\d{14}') }}"
   become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - Reloading app
+  notify: restart full stack
   become: yes

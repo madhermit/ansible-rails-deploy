@@ -9,3 +9,10 @@
     state: touch
   become: yes
   become_user: "{{ rails_user }}"
+
+- name: restart full stack
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - nginx

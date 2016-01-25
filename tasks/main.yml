@@ -10,5 +10,3 @@
   become: yes
 
 - include: deploy.yml
-
-#- include: facts.yml
