@@ -9,6 +9,7 @@ required_gems:
   - bundler
   - json
   - rake
+  - sqlite3
 rails_user: rails
 rails_user: "rails"
 rails_home: "/var/www"
