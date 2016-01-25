@@ -113,7 +113,4 @@
   when: "{{ item | match('\\d{14}') }}"
   become_user: "{{ rails_user }}"
   become: yes
-
-- name: deploy.yml - Reloading app
   notify: restart full stack
-  become: yes
