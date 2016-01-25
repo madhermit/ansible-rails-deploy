@@ -97,6 +97,7 @@
     gem_path: "/usr/local/rbenv/shims/gem"
     executable: "/usr/local/rbenv/shims/bundle"
     chdir: "{{ rails_release_path }}/vendor/bundle"
+    user_install: True
   become: yes
   become_user: "{{ rails_user }}"
 
