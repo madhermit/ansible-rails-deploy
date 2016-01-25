@@ -74,14 +74,6 @@
   become_user: "{{ rails_user }}"
   become: yes
 
-#- name: deploy.yml - run bundle install
-#  command: bundle install --deployment --without {{ rails_bundle_without }}
-#  args:
-#    chdir: "{{ rails_release_path }}"
-#  notify: restart app
-#  become_user: "{{ rails_user }}"
-#  become: yes
-
 - name: deploy.yml - Creating bundle folder at vendors
   file:
     path: "{{ rails_release_path }}/vendor/bundle"
@@ -90,17 +82,25 @@
     group: "{{ rails_user }}"
     mode: u=rwx,g=xr,o=r
 
-- name: deploy.yml - Running bundler
-  bundler:
-    state: latest
-    exclude_groups: "{{ rails_bundle_without }}"
-    gem_path: "/usr/local/rbenv/shims/gem"
-    executable: "/usr/local/rbenv/shims/bundle"
+- name: deploy.yml - run bundle install
+  command: bundle install --deployment --without {{ rails_bundle_without }} --path vendor/bundle
+  args:
     chdir: "{{ rails_release_path }}"
-    user_install: True
-    extra_args: "--path vendor/bundle"
-  become: yes
+  notify: restart app
   become_user: "{{ rails_user }}"
+  become: yes
+
+#- name: deploy.yml - Running bundler
+#  bundler:
+#    state: present
+#    exclude_groups: "{{ rails_bundle_without }}"
+#    gem_path: "/usr/local/rbenv/shims/gem"
+#    executable: "/usr/local/rbenv/shims/bundle"
+#    chdir: "{{ rails_release_path }}"
+#    user_install: True
+#    extra_args: "--path vendor/bundle"
+#  become: yes
+#  become_user: "{{ rails_user }}"
 
 
 - name: deploy.yml - activate the new release
