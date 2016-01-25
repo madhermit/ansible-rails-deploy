@@ -3,6 +3,7 @@
 required_packages:
   - git
   - build-essential
+  - libsqlite3-dev
 rails_bundle_without: #This is a list
   - test
 required_gems:
