@@ -84,8 +84,11 @@
 
 - name: deploy.yml - Creating bundle folder at vendors
   file:
-    path: "{{ rails_release_path }}/vendors/bundle"
+    path: "{{ rails_release_path }}/vendor/bundle"
     state: directory
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    mode: u=rwx,g=xr,o=r
 
 - name: deploy.yml - Running bundler
   bundler:
@@ -93,7 +96,7 @@
     exclude_groups: "{{ rails_bundle_without }}"
     gem_path: "/usr/local/rbenv/shims/gem"
     executable: "/usr/local/rbenv/shims/bundle"
-    chdir: "{{ rails_release_path }}/vendors/bundle"
+    chdir: "{{ rails_release_path }}/vendor/bundle"
   become: yes
   become_user: "{{ rails_user }}"
 
