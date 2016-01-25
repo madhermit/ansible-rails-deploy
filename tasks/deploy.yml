@@ -96,8 +96,9 @@
     exclude_groups: "{{ rails_bundle_without }}"
     gem_path: "/usr/local/rbenv/shims/gem"
     executable: "/usr/local/rbenv/shims/bundle"
-    chdir: "{{ rails_release_path }}/vendor/bundle"
+    chdir: "{{ rails_release_path }}"
     user_install: True
+    extra_args: "--path vendor/bundle"
   become: yes
   become_user: "{{ rails_user }}"
 
