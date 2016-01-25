@@ -1,17 +1,8 @@
 ---
-- name: facts.yml - create local facts dir
-  file:
-    dest: /etc/ansible/facts.d/
-    owner: root
-    group: root
-    mode: 0755
-    state: directory
-  become: yes
-
 - name: facts.yml - save local facts
   template:
     src: facts.j2
-    dest: /etc/ansible/facts.d/rails_deploy.fact
+    dest: ./data/rails_deploy.fact
     owner: root
     group: root
     mode: 0644

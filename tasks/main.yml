@@ -11,4 +11,4 @@
 
 - include: deploy.yml
 
-- include: facts.yml
+#- include: facts.yml
