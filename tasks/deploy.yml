@@ -84,12 +84,11 @@
 
 - name: deploy.yml - Running bundler
   bundler:
-    state: present
+    state: latest
     exclude_groups: "{{ rails_bundle_without }}"
     gem_path: "/usr/local/rbenv/shims/gem"
-    chdir: "{{ rails_release_path }}"
-    local: True
-    binstub_directory: "vendor/bundle"
+    executable: "/usr/local/rbenv/shims/bundle"
+    chdir: "{{ rails_release_path }}/vendor/bundle"
   become: yes
   become_user: "{{ rails_user }}"
 
