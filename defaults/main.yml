@@ -22,7 +22,7 @@ rails_keep_releases: 2
 rails_repo: "git@github.com:lucazz/demo_app.git"
 rails_repo_version: "0.1"
 rails_user_ssh_pub: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrXQZHqxPOlz59ho3Zf3CmHFV6prGK2pBlMP3bYm7M+boR8CJjDXFmRiTJ/xzTLQC2PxJ0wtyEHdAHJWPvpqmhZPVt7utGb4hm7jwE/ETmsWC1k1uHiHwGhj0aSA5DMyti0MOX//DOux1XtYK6YybkGFGm+D18vjSFrUDdOEBvtcZMSvAIheNOaHq1mA/gtzTuT8PN400exjwzEEVG840esyKVVIT6umhAWLqejn5LthtkzoWTpIewcZy9J5fIl142qiFA+SuGGRYt1BjtRahLMWQ1dB+J8oEAYAKdV38/HyEesf5kHSy8c+MWfH3aIjiDxk8Do33V68FVtoOZia17 test-key@do-not-use"
-rails_user_ssh_priv: +|
+rails_user_ssh_priv: |
   -----BEGIN RSA PRIVATE KEY-----
   MIIEowIBAAKCAQEAq10GR6sTzpc+fYaN2X9wphxVeqaxitqQZTD922JuzPm6EfAi
   Yw1xZkYkyf8c0y0Atj8SdMLchB3QByVj76apoWT1be7rRm+IZu48BPxE5rFgtZNb
