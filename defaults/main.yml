@@ -16,6 +16,7 @@ rails_user: "rails"
 rails_home: "/var/www"
 rails_path: "/var/www"
 rails_app_name: demo_app
+app_name: {{ rails_app_name }}  
 rails_environment:
   RACK_ENV: staging
 rails_keep_releases: 2
