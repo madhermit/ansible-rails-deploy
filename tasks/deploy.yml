@@ -83,8 +83,7 @@
     mode: u=rwx,g=xr,o=r
 
 - name: deploy.yml - run bundle install
-  #command: /usr/local/rbenv/shims/bundle install --deployment --without {{ rails_bundle_without }} --path vendor/bundle
-  command: /usr/local/rbenv/shims/bundle install --no-deployment --without {{ rails_bundle_without }} --path vendor/bundle
+  command: /usr/local/rbenv/shims/bundle install --deployment --without {{ rails_bundle_without }} --path vendor/bundle
   args:
     chdir: "{{ rails_release_path }}"
   notify: restart app
