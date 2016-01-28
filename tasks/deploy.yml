@@ -104,6 +104,14 @@
   shell: ls -1t {{ rails_path_app }}/releases/ | tail -n +{{ rails_keep_releases + 1 }}
   register: rails_releases_dirs
 
+- name: deply.yml - scafolding database
+  shell: /usr/local/rbenv/shims/bundle exec rake db:create db:migrate
+  args:
+    chdir: "{{ rails_release_path }}"
+  become_user: "{{ rails_user }}"
+  notify: restart app
+  become: yes
+
 - name: deploy.yml - remove old releases
   file:
     dest: "{{ rails_path_app }}/releases/{{ item }}"

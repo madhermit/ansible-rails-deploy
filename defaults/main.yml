@@ -13,7 +13,6 @@ required_gems:
   - rake
   - sqlite3
 rails_user: rails
-rails_user: "rails"
 rails_home: "/var/www"
 rails_path: "/var/www"
 rails_app_name: demo_app
