@@ -107,16 +107,6 @@
   become_user: "{{ rails_user }}"
   become: yes
 
-- name: deploy.yml - activate the new release
-  file:
-    src: "{{ rails_release_path }}"
-    dest: "{{ rails_path_app }}/current"
-    owner: "{{ rails_user }}"
-    group: "{{ rails_user }}"
-    state: link
-  become_user: "{{ rails_user }}"
-  become: yes
-
 - name: deploy.yml - get releases
   shell: ls -1t {{ rails_path_app }}/releases/ | tail -n +{{ rails_keep_releases + 1 }}
   register: rails_releases_dirs
