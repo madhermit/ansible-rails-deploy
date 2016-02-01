@@ -82,6 +82,23 @@
     group: "{{ rails_user }}"
     mode: u=rwx,g=xr,o=r
 
+- name: deploy.yml - activate the new release
+  file:
+    src: "{{ rails_release_path }}"
+    dest: "{{ rails_path_app }}/current"
+    owner: "{{ rails_user }}"
+    group: "{{ rails_user }}"
+    state: link
+  become_user: "{{ rails_user }}"
+  become: yes
+
+- name: deploy.yml - Templating out .env file
+  template:
+    dest: "{{ rails_release_path }}/current"
+    src: dotenv.j2
+  become: yes
+  become_user: "{{ rails_user }}"
+
 - name: deploy.yml - run bundle install
   command: /usr/local/rbenv/shims/bundle install --deployment --without {{ rails_bundle_without }} --path vendor/bundle
   args:
