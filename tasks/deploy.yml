@@ -99,10 +99,20 @@
   become: yes
   become_user: "{{ rails_user }}"
 
+#- name: deploy.yml - run bundle install
+#  command: /usr/local/rbenv/shims/bundle install --deployment --path vendor/bundle
+#  args:
+#    chdir: "{{ rails_release_path }}"
+#  notify: restart app
+#  become_user: "{{ rails_user }}"
+#  become: yes
+
 - name: deploy.yml - run bundle install
-  command: /usr/local/rbenv/shims/bundle install --deployment --without {{ rails_bundle_without }} --path vendor/bundle
-  args:
+  bundler:
+    executable: /usr/local/rbenv/shims/bundle
+    gem_path: ./vendor/bundle
     chdir: "{{ rails_release_path }}"
+    state: present
   notify: restart app
   become_user: "{{ rails_user }}"
   become: yes

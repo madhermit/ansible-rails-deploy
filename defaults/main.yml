@@ -5,7 +5,6 @@ required_packages:
   - build-essential
   - libsqlite3-dev
   - nodejs
-rails_bundle_without: #This is a list
 required_gems:
   - bundler
   - json
