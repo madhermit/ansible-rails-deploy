@@ -110,7 +110,7 @@
 - name: deploy.yml - run bundle install
   bundler:
     executable: /usr/local/rbenv/shims/bundle
-    extra_args: "--path vendor/bundle"
+    extra_args: "--path {{ rails_release_path }}/current/vendor/bundle"
     state: present
     chdir: "{{ rails_release_path }}/current"
   notify: restart app
