@@ -111,7 +111,7 @@
   bundler:
     executable: /usr/local/rbenv/shims/bundle
     chdir: "{{ rails_release_path }}/current"
-    extra_args: "--path vendor/bundle"
+    extra_args: "--path {{ rails_release_path }}/vendor/bundle"
     state: present
   notify: restart app
   become_user: "{{ rails_user }}"
