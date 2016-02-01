@@ -110,8 +110,8 @@
 - name: deploy.yml - run bundle install
   bundler:
     executable: /usr/local/rbenv/shims/bundle
-    binstub_directory: ./vendor/bundle
-    chdir: "{{ rails_release_path }}"
+    chdir: "{{ rails_release_path }}/current"
+    extra_args: "--path vendor/bundle"
     state: present
   notify: restart app
   become_user: "{{ rails_user }}"
