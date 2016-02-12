@@ -6,6 +6,8 @@ required_packages:
   - libsqlite3-dev
   - nodejs
   - libpq-dev
+  - postgresql-client
+  - libpq5
 required_gems:
   - bundler
   - json
