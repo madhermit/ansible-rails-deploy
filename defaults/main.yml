@@ -5,6 +5,7 @@ required_packages:
   - build-essential
   - libsqlite3-dev
   - nodejs
+  - libpq-dev
 required_gems:
   - bundler
   - json
