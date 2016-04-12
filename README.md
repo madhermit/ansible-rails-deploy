@@ -1,7 +1,7 @@
 Rails Deployment Ansible Role
 =========
 
-![HE:Labs](https://raw.githubusercontent.com/Helabs/helabs.github.com/master/images/logo.png "HE:Labs")
+![HE:Labs](http://helabs.com/images/brand-helabs.png "HE:Labs")
 
 This is a simple role, that deploys a rails application from a git repo.
 
